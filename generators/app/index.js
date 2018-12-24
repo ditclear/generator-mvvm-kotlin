@@ -11,7 +11,7 @@ module.exports = Generator.extend({
   },
   prompting: function () {
     this.log(yosay(
-      'Welcome to ' + chalk.red('Kotlin Android Starter') + ' generator!'
+      'Welcome to ' + chalk.red('MVVM Kotlin Starter') + ' generator!'
     ));
 
     const prompts = [
@@ -23,7 +23,9 @@ module.exports = Generator.extend({
       },
       {
         name: 'package',
-        message: 'What package will you be publishing the app under?'
+        message: 'What package will you be publishing the app under?',
+        store: true,
+        default: 'com.mycompany.app'
       },
       {
         name: 'targetSdk',
@@ -35,59 +37,52 @@ module.exports = Generator.extend({
         name: 'minSdk',
         message: 'What is the minimum Android SDK you wish to support?',
         store: true,
-        default: 19 // Android 4.0 (Ice Cream Sandwich)
+        default: 14 // Android 4.0 (Ice Cream Sandwich)
       }];
 
     return this.prompt(prompts).then(props => {
       this.props.appPackage = props.package;
-      this.appName = props.name;
-      this.appPackage = props.package;
-      this.androidTargetSdkVersion = props.targetSdk;
-      this.androidMinSdkVersion = props.minSdk;
+      this.props.appName = props.name;
+      this.props.appPackage = props.package;
+      this.props.androidTargetSdkVersion = props.targetSdk;
+      this.props.androidMinSdkVersion = props.minSdk;
     });
   },
 
   writing: function () {
     var packageDir = this.props.appPackage.replace(/\./g, '/');
-    var appFolder = 'template-kotlin';
+    var appFolder = 'template-mvvm-kotlin';
 
     mkdirp('app');
-    mkdirp('app/src/main/assets');
     mkdirp('app/src/main/java/' + packageDir);
+    mkdirp('app/src/main/core/kotlin/' + packageDir);
+    mkdirp('app/src/main/core/res/layout');
+    mkdirp('app/src/main/core/res/values');
     mkdirp('app/src/androidTest/java/' + packageDir);
-    mkdirp('app/src/commonTest/java/' + packageDir);
-    mkdirp('app/src/debug');
-    mkdirp('app/src/release');
-    mkdirp('app/src/test/resources');
     mkdirp('app/src/test/java/' + packageDir);
-
     var appPath = this.sourceRoot() + '/' + appFolder + '/';
-
-    this.fs.copy(appPath + 'gitignore', '.gitignore');
+    this.fs.copy(appPath + 'README.md', 'README.md');
     this.fs.copy(appPath + 'build.gradle', 'build.gradle');
     this.fs.copy(appPath + 'gradle.properties', 'gradle.properties');
     this.fs.copy(appPath + 'gradlew', 'gradlew');
     this.fs.copy(appPath + 'gradlew.bat', 'gradlew.bat');
     this.fs.copy(appPath + 'settings.gradle', 'settings.gradle');
-    this.fs.copy(appPath + 'app/gitignore', 'app/.gitignore');
-    this.fs.copy(appPath + 'app/lint.xml', 'app/lint.xml');
-    this.fs.copy(appPath + 'app/dependencies.gradle', 'app/dependencies.gradle');
     this.fs.copy(appPath + 'app/proguard-rules.pro', 'app/proguard-rules.pro');
 
     this.fs.copy(appPath + 'gradle', 'gradle');
     this.fs.copy(appPath + 'app/src/main/res', 'app/src/main/res');
-    this.fs.copy(appPath + 'app/src/test/resources', 'app/src/test/resources');
+    this.fs.copy(appPath + 'app/src/main/core/res', 'app/src/main/core/res');
 
-    this.fs.copyTpl(appPath + 'README.md', 'README.md', this.props);
     this.fs.copyTpl(appPath + 'app/build.gradle', 'app/build.gradle', this.props);
-    this.fs.copyTpl(appPath + 'app/src/androidTest/java/io/mvpstarter/sample', 'app/src/androidTest/java/' + packageDir, this.props);
-    this.fs.copyTpl(appPath + 'app/src/commonTest/java/io/mvpstarter/sample', 'app/src/commonTest/java/' + packageDir, this.props);
-    this.fs.copyTpl(appPath + 'app/src/debug/AndroidManifest.xml', 'app/src/debug/AndroidManifest.xml', this.props);
-    this.fs.copyTpl(appPath + 'app/src/debug/res', 'app/src/debug/res', this.props);
     this.fs.copyTpl(appPath + 'app/src/main/AndroidManifest.xml', 'app/src/main/AndroidManifest.xml', this.props);
-    this.fs.copyTpl(appPath + 'app/src/main/java/io/mvpstarter/sample', 'app/src/main/java/' + packageDir, this.props);
+    this.fs.copyTpl(appPath + 'app/src/androidTest/java/io/ditclear/app', 'app/src/androidTest/java/' + packageDir, this.props);
+    this.fs.copyTpl(appPath + 'app/src/test/java/io/ditclear/app', 'app/src/test/java/' + packageDir, this.props);
+    this.fs.copyTpl(appPath + 'app/src/main/java/io/ditclear/app', 'app/src/main/java/' + packageDir, this.props);
+    this.fs.copyTpl(appPath + 'app/src/main/core/kotlin/io/ditclear/app', 'app/src/main/core/kotlin/' + packageDir, this.props);
+
     this.fs.copyTpl(appPath + 'app/src/main/res/layout', 'app/src/main/res/layout', this.props);
-    this.fs.copyTpl(appPath + 'app/src/release/res', 'app/src/release/res', this.props);
-    this.fs.copyTpl(appPath + 'app/src/test/java/io/mvpstarter/sample', 'app/src/test/java/' + packageDir, this.props);
+    this.fs.copyTpl(appPath + 'app/src/main/core/res/layout', 'app/src/main/core/res/layout', this.props);
+    this.fs.copyTpl(appPath + 'app/src/main/res/values/strings.xml', 'app/src/main/res/values/strings.xml', this.props);
+    this.fs.copyTpl(appPath + 'app/src/main/core/res/layout', 'app/src/main/core/res/layout', this.props);
   }
 });

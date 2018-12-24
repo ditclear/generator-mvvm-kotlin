@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="translucent_view" type="id"/>
+    <item name="statusbar_view" type="id"/>
+    <item name="click_time" type="id"/>
+</resources>

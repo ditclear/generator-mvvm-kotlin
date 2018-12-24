@@ -1,12 +1,12 @@
 {
-  "name": "generator-kotlin-android",
-  "version": "1.0.1",
-  "description": "An Kotlin MVP Boilerplate to save me having to create the same project over from scratch every time! :)",
-  "homepage": "https://github.com/ravidsrk/kotlin-android-starter",
+  "name": "generator-mvvm-kotlin",
+  "version": "1.2.6",
+  "description": "An Kotlin MVVM Boilerplate For Android to save me having to create the same project over from scratch every time! :)",
+  "homepage": "https://github.com/ditclear/paonet",
   "author": {
-    "name": "Ravindra Kumar",
-    "email": "ravindrakumar8088@gmail.com",
-    "url": "https://github.com/ravidsrk/"
+    "name": "ditclear",
+    "email": "ditclear@qq.com",
+    "url": "https://github.com/ditclear"
   },
   "files": [
     "generators"
@@ -15,6 +15,7 @@
   "keywords": [
     "Android",
     "Starter",
+    "MVVM",
     "Kotlin",
     "yeoman-generator"
   ],
@@ -59,9 +60,8 @@
       "mocha": true
     }
   },
-  "repository": "ravidsrk/generator-kotlin-android",
+  "repository": "ditclear/generator-mvvm-kotlin",
   "scripts": {
-    "prepublish": "gulp prepublish",
     "test": "gulp"
   },
   "license": "Apache-2.0"
