@@ -1,6 +1,6 @@
 {
   "name": "generator-mvvm-kotlin",
-  "version": "1.2.6",
+  "version": "1.3.2",
   "description": "An Kotlin MVVM Boilerplate For Android to save me having to create the same project over from scratch every time! :)",
   "homepage": "https://github.com/ditclear/paonet",
   "author": {

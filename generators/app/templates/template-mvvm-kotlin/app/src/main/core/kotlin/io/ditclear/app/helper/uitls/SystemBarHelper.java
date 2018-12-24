@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import io.ditclear.app.R;
+import <%= appPackage %>.R;
 import kotlin.jvm.JvmStatic;
 
 import java.lang.reflect.Field;
